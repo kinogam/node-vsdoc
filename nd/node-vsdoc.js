@@ -259,7 +259,13 @@
         read : function(fd, buffer, offset, length, position, [callback]) { },
         readSync : function(fd, buffer, offset, length, position) { },
         readSync : function(fd, length, position, encoding) { },
-        readFile : function(filename, [encoding], [callback]) { },
+        readFile : function(filename, encoding, callback) {
+            ///<summary>
+            ///Asynchronously reads the entire contents of a file
+            ///</summary>
+            ///<param name="encoding" type="[option]String"></param>
+            ///<param name="callback" type="[option]Function"></param>
+         },
         readFileSync : function(filename, [encoding]) { },
         writeFile : function(filename, data, encoding='utf8', [callback]) { },
         writeFileSync : function(filename, data, encoding='utf8') { },
