@@ -1,5 +1,5 @@
 ﻿(function () {
-    var require = window.require = function (modelName) {
+    var require = this.require = function (modelName) {
         ///<summary>
         ///To require modules.
         ///</summary>
@@ -8,56 +8,122 @@
         ///</param>
         var model;
         eval("model=" + modelName);
-//        model.resolve = function(){ return model;};
-//        model.paths = null;
         return model;
     }
 
     require.resolve = function(){};
-    window.__filename = null;
-    window.__dirname = null;
-    window.console = {
-        log: function () {
-            ///<summary>
-            ///Prints to stdout with newline
-            ///</summary>
-        },
-        info: function () { },
-        warn: function () { },
-        error: function () { },
-        dir: function (obj) { },
-        time: function (label) { },
-        timeEnd: function (label) { },
-        trace: function () { },
-        assert: function () { }
+    require.cache = function(){};
+
+    
+    this.process = {
+        EventEmitter:function(){},
+        addListener:function(){},
+        arch:'',
+        argv:{},
+        assert:function(){},
+        binding:function(){},
+        chdir:function(){},
+        createChildProcess:function(){},
+        cwd:function(){},
+        debug:function(){},
+        dlopen:function(){},
+        emit:function(){},
+        env:{},
+        error:function(){},
+        execPath:'',
+        exit:function(){},
+        features:{},
+        inherits:function(){},
+        kill:function(){},
+        listeners:function(){},
+        memoryUsage:function(){},
+        mixin:function(){},
+        moduleLoadList:{},
+        nextTick:function(){},
+        once:function(){},
+        on:function(){},
+        openStdin:function(){},
+        pid:Number(),
+        platform:'',
+        reallyExit:function(){},
+        removeAllListeners:function(){},
+        removeListener:function(){},
+        setMaxListeners:function(){},
+        stderr:{},
+        stdin:{},
+        stdout:{},
+        title:'',
+        umask:function(){},
+        unwatchFile:function(){},
+        uptime:function(){},
+        uvCounters:function(){},
+        versions:{},
+        version:'',
+        watchFile:function(){}
+    };
+
+
+     this.console = {
+         assert:function(){},
+         dir:function(obj){},
+         error:function(){},
+         info:function(){},
+         log:function(){},
+         timeEnd:function(){},
+         time:function(label){},
+         trace:function(label){},
+         warn:function(){} 
     }
 
-    var process = {
-        chdir : function(directory) { },
-        cwd : function() { },
-        exit : function(code=0) { },
-        getgid : function() { },
-        setgid : function(id) { },
-        getuid : function() { },
-        setuid : function(id) { },
-        kill : function(pid, signal='SIGTERM') { },
-        memoryUsage : function() { },
-        nextTick : function(callback) { },
-        umask : function([mask]) { },
-        uptime : function() { },
-        stdout : null,
-        stderr : null,
-        stdin : null,
-        argv : null,
-        execPath : null,
-        env : null,
-        version : null,
-        installPrefix : null,
-        pid : null,
-        title : null,
-        arch : null,
-        platform : null
+    var Buffers = {
+        byteLength:function(){},
+        isBuffer:function(){},
+        poolSize:0
+    }
+
+    Buffers.prototype = {
+        write : function(string, offset, length, encoding) { },
+        toString : function(encoding, start, end) { },
+        copy : function(targetBuffer, targetStart, sourceStart, sourceEnd) { },
+        slice : function(start, end) { },
+        readUInt8 : function(offset, noAssert) { },
+        readUInt16LE : function(offset, noAssert) { },
+        readUInt16BE : function(offset, noAssert) { },
+        readUInt32LE : function(offset, noAssert) { },
+        readUInt32BE : function(offset, noAssert) { },
+        readInt8 : function(offset, noAssert) { },
+        readInt16LE : function(offset, noAssert) { },
+        readInt16BE : function(offset, noAssert) { },
+        readInt32LE : function(offset, noAssert) { },
+        readInt32BE : function(offset, noAssert) { },
+        readFloatLE : function(offset, noAssert) { },
+        readFloatBE : function(offset, noAssert) { },
+        readDoubleLE : function(offset, noAssert) { },
+        readDoubleBE : function(offset, noAssert) { },
+        writeUInt8 : function(value, offset, noAssert) { },
+        writeUInt16LE : function(value, offset, noAssert) { },
+        writeUInt16BE : function(value, offset, noAssert) { },
+        writeUInt32LE : function(value, offset, noAssert) { },
+        writeUInt32BE : function(value, offset, noAssert) { },
+        writeInt8 : function(value, offset, noAssert) { },
+        writeInt16LE : function(value, offset, noAssert) { },
+        writeInt16BE : function(value, offset, noAssert) { },
+        writeInt32LE : function(value, offset, noAssert) { },
+        writeInt32BE : function(value, offset, noAssert) { },
+        writeFloatLE : function(value, offset, noAssert) { },
+        writeFloatBE : function(value, offset, noAssert) { },
+        writeDoubleLE : function(value, offset, noAssert) { },
+        writeDoubleBE : function(value, offset, noAssert) { },
+        fill : function(value, offset, length) { },
+        length : null
+
     };
+   
+
+    this.__filename = null;
+    this.__dirname = null;
+    this.module = {exports:{}};
+
 
     var util = {
         format: function () { },
@@ -81,47 +147,7 @@
         }
     };
 
-
-
-    var Buffers = window.Buffers = function (args) { };
-    Buffers.isBuffer = function (obj) { };
-    Buffers.byteLength = function (string, encoding) { };
-    Buffers.prototype = {
-        write : function(string, offset, length, encoding) { },
-        toString : function(encoding, start=0, end=buffer.length) { },
-        copy : function(targetBuffer, targetStart=0, sourceStart=0, sourceEnd=buffer.length) { },
-        slice : function(start, end=buffer.length) { },
-        readUInt8 : function(offset, noAssert=false) { },
-        readUInt16LE : function(offset, noAssert=false) { },
-        readUInt16BE : function(offset, noAssert=false) { },
-        readUInt32LE : function(offset, noAssert=false) { },
-        readUInt32BE : function(offset, noAssert=false) { },
-        readInt8 : function(offset, noAssert=false) { },
-        readInt16LE : function(offset, noAssert=false) { },
-        readInt16BE : function(offset, noAssert=false) { },
-        readInt32LE : function(offset, noAssert=false) { },
-        readInt32BE : function(offset, noAssert=false) { },
-        readFloatLE : function(offset, noAssert=false) { },
-        readFloatBE : function(offset, noAssert=false) { },
-        readDoubleLE : function(offset, noAssert=false) { },
-        readDoubleBE : function(offset, noAssert=false) { },
-        writeUInt8 : function(value, offset, noAssert=false) { },
-        writeUInt16LE : function(value, offset, noAssert=false) { },
-        writeUInt16BE : function(value, offset, noAssert=false) { },
-        writeUInt32LE : function(value, offset, noAssert=false) { },
-        writeUInt32BE : function(value, offset, noAssert=false) { },
-        writeInt8 : function(value, offset, noAssert=false) { },
-        writeInt16LE : function(value, offset, noAssert=false) { },
-        writeInt16BE : function(value, offset, noAssert=false) { },
-        writeInt32LE : function(value, offset, noAssert=false) { },
-        writeInt32BE : function(value, offset, noAssert=false) { },
-        writeFloatLE : function(value, offset, noAssert=false) { },
-        writeFloatBE : function(value, offset, noAssert=false) { },
-        writeDoubleLE : function(value, offset, noAssert=false) { },
-        writeDoubleBE : function(value, offset, noAssert=false) { },
-        fill : function(value, offset=0, length=-1) { },
-        length : null
-    };
+    
 
     var streams = {
         setEncoding : function(encoding) { },
